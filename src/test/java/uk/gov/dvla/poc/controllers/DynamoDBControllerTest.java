@@ -18,7 +18,7 @@ import uk.gov.dvla.poc.forms.BicycleLicenceUpdateForm;
 import uk.gov.dvla.poc.model.BicycleLicence;
 import uk.gov.dvla.poc.repository.BicycleLicenceDynamoDBRepository;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 class DynamoDBControllerTest {
 

@@ -8,7 +8,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import uk.gov.dvla.poc.model.BicycleLicence;
@@ -16,7 +16,7 @@ import com.amazonaws.regions.Regions;
 
 import java.util.*;
 
-@Slf4j
+@Log4j2
 @Repository
 public class BicycleLicenceDynamoDBRepository implements CrudRepository<BicycleLicence, String> {
 
@@ -127,5 +127,13 @@ public class BicycleLicenceDynamoDBRepository implements CrudRepository<BicycleL
     public void deleteAll() {
         log.info("Deleting all licence documents from the DynamoDB table...");
         dynamoDBMapper.batchDelete(findAll());
+    }
+
+    @Override
+    public void deleteAllById(Iterable<? extends String> ids) {
+        log.info("Deleting multiple licence documents by IDs from the DynamoDB table...");
+        for (String id : ids) {
+            deleteById(id);
+        }
     }
 }
