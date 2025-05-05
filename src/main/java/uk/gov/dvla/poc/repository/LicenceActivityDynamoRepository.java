@@ -12,7 +12,7 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.GetItemRequest;
 import com.amazonaws.services.dynamodbv2.model.GetItemResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import uk.gov.dvla.poc.model.BicycleLicence;
@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Slf4j
+@Log4j2
 @Repository
 public class LicenceActivityDynamoRepository  implements CrudRepository<LicenceActivity, String> {
 
@@ -126,5 +126,13 @@ public class LicenceActivityDynamoRepository  implements CrudRepository<LicenceA
     @Override
     public void deleteAll() {
 
+    }
+
+    @Override
+    public void deleteAllById(Iterable<? extends String> ids) {
+        log.info("Deleting multiple licence activities by IDs from the DynamoDB table...");
+        for (String id : ids) {
+            deleteById(id);
+        }
     }
 }

@@ -2,7 +2,6 @@ package uk.gov.dvla.poc.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import uk.gov.dvla.poc.events.ContactDetailsChanged;
@@ -12,15 +11,16 @@ import uk.gov.dvla.poc.events.PenaltyPointsRemoved;
 import uk.gov.dvla.poc.model.*;
 import uk.gov.dvla.poc.repository.BicycleLicenceDynamoDBRepository;
 import uk.gov.dvla.poc.repository.LicenceActivityDynamoRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.ui.Model;
 import uk.gov.dvla.poc.forms.BicycleLicenceQueryForm;
 import uk.gov.dvla.poc.forms.BicycleLicenceUpdateForm;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @RestController
-@Slf4j
+@Log4j2
 public class DynamoDBController {
 
     private final BicycleLicenceDynamoDBRepository licenceDynamoDBRepository;
